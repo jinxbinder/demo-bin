@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <!-- 变量配置
+    <Properties>
+        <Property name="log_path">D:/Tomcat 9.0/logs/oilwell</Property>
+    </Properties>  -->
+
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} [%p] %C{1} %l %msg%n" />
+        </Console>
+        <!--文件日志
+        <RollingFile name="ROLLING" fileName="${log_path}/logs/console.log"
+                     filePattern="${log_path}/logs/$${date:yyyy-MM}/console_%d{yyyy-MM-dd}_%i.log">
+            <PatternLayout pattern="%d{HH:mm:ss} [%p] %C{1} %l %t %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile> -->
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="CONSOLE" />
+           <!-- <AppenderRef ref="ROLLING"/>  -->
+        </Root>
+
+        <!-- 控制某些包下的类的日志级别
+        <Logger name="org.mybatis.spring" level="error">
+            <AppenderRef ref="ROLLING"/>
+        </Logger> -->
+    </Loggers>
+</Configuration>
