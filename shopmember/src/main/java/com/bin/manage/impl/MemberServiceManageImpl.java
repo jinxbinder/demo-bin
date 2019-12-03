@@ -51,7 +51,11 @@ public class MemberServiceManageImpl extends BaseApiService implements MemberSer
         member.setPassword(null);
         return setSuccessData(member);
     }
-
+    /**
+    * Description: 功能描述（会员注册功能） <br/>
+    * date: 2019/12/3 16:30<br/>
+    * @author libd <br/>
+    */
     @Override
     public Map<String, Object> sign(Member member) {
         member.setCreated(DateUtil.getTimestamp());
@@ -62,7 +66,7 @@ public class MemberServiceManageImpl extends BaseApiService implements MemberSer
         } catch (Exception e) {
 
             log.error("***sql插入错误：",e);
-            return setErrData("注册失败");
+            return setErrData("注册失败,用户名或手机号已存在");
         }
         //队列
         Destination activeMQQueue = new ActiveMQQueue(MESSAGES_QUEUE);
