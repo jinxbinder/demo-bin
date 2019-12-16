@@ -50,6 +50,6 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
         if (StringUtils.isEmpty(member.getPhone())){
             return setErrData("手机号不能为空");
         }
-        return ;
+        return memberServiceManage.login(member);
     }
 }

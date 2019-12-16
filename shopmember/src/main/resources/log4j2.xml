@@ -7,7 +7,7 @@
 
     <Appenders>
         <Console name="CONSOLE" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss} [%p] %C{1} %l %msg%n" />
+            <PatternLayout pattern="%d{HH:mm:ss} [%p] %c %L(%M) %msg%n" />
         </Console>
         <!--文件日志
         <RollingFile name="ROLLING" fileName="${log_path}/logs/console.log"
