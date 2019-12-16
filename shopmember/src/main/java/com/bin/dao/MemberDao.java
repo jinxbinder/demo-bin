@@ -19,5 +19,6 @@ import org.apache.ibatis.annotations.Select;
 public interface MemberDao extends BaseDao {
     @Select("select * from mb_user where id = #{id}")
     Member getMemberInfo(Integer id);
-
+    @Select("select id,username,phone,email from mb_user where phone = #{phone} and password = #{password};")
+    Member getLogin(String phone,String password);
 }

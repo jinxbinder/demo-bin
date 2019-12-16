@@ -15,11 +15,13 @@ import java.util.Map;
  */
 
 public interface MemberServiceManage {
-
+    //获取用户信息
     Map<String,Object> getMember(String token);
     //会员注册
     Map<String,Object> sign(Member member);
     //MD5加盐
     String md5PassSalt(String phone, String password);
+    //会员登录
+    Map<String,Object> login(Member member);
 
 }

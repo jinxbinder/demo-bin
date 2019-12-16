@@ -1,10 +1,12 @@
 package com.bin.manage.impl;
 
+
 import com.alibaba.fastjson.JSONObject;
 import com.bin.common.api.BaseApiService;
 import com.bin.common.redis.BaseRedisService;
 import com.bin.common.utils.DateUtil;
 import com.bin.common.utils.MD5Util;
+import com.bin.common.utils.TokenUtil;
 import com.bin.constants.DBconf;
 import com.bin.constants.MQconf;
 import com.bin.dao.MemberDao;
@@ -12,8 +14,10 @@ import com.bin.entity.Member;
 import com.bin.manage.MemberServiceManage;
 import com.bin.mq.producer.SignMailProducer;
 
+
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.commons.lang.StringUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,7 +29,7 @@ import java.util.Map;
  * ClassName: MemberServiceManageImpl <br/>
  * Description: <br/>
  * date: 2019/11/27 11:03<br/>
- *
+ * 会员业务代码
  * @author libd<br />
  * @version 1.0
  * @since JDK 1.8
@@ -40,6 +44,8 @@ public class MemberServiceManageImpl extends BaseApiService implements MemberSer
     private String MESSAGES_QUEUE;
     @Autowired
     private MemberDao memberDao;
+    @Autowired
+    private TokenUtil tokenUtil;
     @Override
     public Map<String, Object> getMember(String token) {
         String userId = baseRedisService.get(token);
@@ -87,6 +93,26 @@ public class MemberServiceManageImpl extends BaseApiService implements MemberSer
         String newPass = MD5Util.MD5(phone + password);
         return newPass;
     }
+    /**
+    * Description: 功能描述（会员登录） <br/>
+    * date: 2019/12/15 12:39<br/>
+    * @author libd <br/>
+    */
+    @Override
+    public Map<String, Object> login(Member member) {
+        String phone = member.getPhone();
+        String password = member.getPassword();
+        String passSalt = md5PassSalt(phone,password);
+        Member memberInfo = memberDao.getLogin(phone,passSalt);
+        if(memberInfo == null){
+            return setErrData("手机号或密码不正确");
+        }
+        String token = tokenUtil.getToken();
+        String memberId = memberInfo.getId()+"";
+        baseRedisService.set(memberId,token, 600L);
+        return setSuccessData(token);
+    }
+
     /**
     * Description: 功能描述（邮箱消息报文拼装） <br/>
     * date: 2019/11/30 19:25<br/>

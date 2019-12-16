@@ -14,7 +14,7 @@ import java.util.Map;
  * ClassName: MemberServiceImpl <br/>
  * Description: <br/>
  * date: 2019/11/27 10:43<br/>
- *
+ * 接口参数校验
  * @author libd<br />
  * @version 1.0
  * @since JDK 1.8
@@ -40,5 +40,16 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
             return setErrData("手机号不能为空");
         }
         return memberServiceManage.sign(member);
+    }
+
+    @Override
+    public Map<String, Object> login(Member member) {
+        if(StringUtils.isEmpty(member.getPassword())){
+            return setErrData("密码不能为空");
+        }
+        if (StringUtils.isEmpty(member.getPhone())){
+            return setErrData("手机号不能为空");
+        }
+        return ;
     }
 }

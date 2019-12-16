@@ -33,5 +33,11 @@ public interface MemberService {
     */
     @RequestMapping("/sign")
     Map<String,Object> sign(@RequestBody Member member);
-
+    /**
+    * Description: 功能描述（会员登录接口） <br/>
+    * date: 2019/12/15 12:22<br/>
+    * @author libd <br/>
+    */
+    @RequestMapping("login")
+    Map<String,Object> login(@RequestBody Member member);
 }
