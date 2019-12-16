@@ -1,6 +1,6 @@
-# demo-bin
+# 个人练习
 里面记录了一些本人学习过程中用来练习的小demo
-项目整体使用springboot搭建 结合了springcloud eureka注册中心 将服务分为多个模块
-使用activeMQ做消息服务 整合redis作为缓存处理
-数据库使用了mysql 连接使用mybatis+druid
-在日志方面导入了log4j2
+####项目技术栈
+   #####springboot+springcloud eureka feign +mybatis+druid+mysql+log4j2+activeMQ
+   
+项目大体是在观看蚂蚁课堂的springboot教程是仿写的，在未来随着学习的深入个人会在里面添加一些个性的东西。

@@ -38,6 +38,6 @@ public interface MemberService {
     * date: 2019/12/15 12:22<br/>
     * @author libd <br/>
     */
-    @RequestMapping("login")
+    @RequestMapping("/login")
     Map<String,Object> login(@RequestBody Member member);
 }
