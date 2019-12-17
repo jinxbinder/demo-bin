@@ -2,9 +2,13 @@ package com.bin.controller;
 
 import com.bin.entity.Member;
 import com.bin.feign.MemberFeign;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.annotation.Resource;
 
 /**
  * ClassName: MemberController <br/>
@@ -17,13 +21,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class MemberController {
-    @Autowired
+    private static Logger log = LogManager.getLogger(MemberController.class);
+    @Resource
     private MemberFeign memberFeign;
     @RequestMapping("/login")
     public String login(Member member){
-        System.out.println("进入membercontroller/login");
+        log.info("进入membercontroller/login");
         memberFeign.login(member);
-        return "ccc";
+        return "login";
 
     }
 }

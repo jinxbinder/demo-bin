@@ -1,10 +1,11 @@
 package com.bin.controller;
 
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.logging.Logger;
+
 
 /**
  * ClassName: DemoController <br/>
@@ -17,10 +18,15 @@ import java.util.logging.Logger;
  */
 @Controller
 public class DemoController {
-
+    Logger log = LogManager.getLogger(DemoController.class);
     @RequestMapping("/index")
     public String index(){
-        System.out.println("进入index方法=======================");
+        log.info("进入index方法======================");
         return "index";
+    }
+    @RequestMapping("/log")
+    public String log(){
+        log.info("进入log方法======================");
+        return "login";
     }
 }
