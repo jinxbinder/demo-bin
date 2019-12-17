@@ -17,7 +17,6 @@ import java.util.Map;
  * @version 1.0
  * @since JDK 1.8
  */
-@RequestMapping("/member")
 public interface MemberService {
     /**
     * Description: 功能描述（根据token返回会员信息） <br/>

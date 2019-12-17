@@ -1,6 +1,5 @@
 package com.bin.dao;
 
-import com.bin.common.mybatis.BaseDao;
 import com.bin.entity.Member;
 
 import org.apache.ibatis.annotations.Mapper;

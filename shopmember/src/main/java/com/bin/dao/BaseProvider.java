@@ -1,10 +1,9 @@
-package com.bin.common.mybatis;
+package com.bin.dao;
 
 import com.bin.common.utils.ReflectionUtil;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 
 import java.util.Map;
 
@@ -17,7 +16,7 @@ import java.util.Map;
  * @version 1.0
  * @since JDK 1.8
  */
-public class BaseProvider  {
+public class BaseProvider {
     Logger log = LogManager.getLogger(BaseProvider.class);
     public String save(Map<Object,String> map){
         final Object object = map.get("oj");
