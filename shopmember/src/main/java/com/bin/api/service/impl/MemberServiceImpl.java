@@ -6,6 +6,7 @@ import com.bin.entity.Member;
 import com.bin.manage.MemberServiceManage;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -24,12 +25,12 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
     @Autowired
     private MemberServiceManage memberServiceManage;
     @Override
-    public Map<String, Object> getMember(String token) {
+    public Map<String, Object> getMember(@RequestBody String token) {
         return  StringUtils.isEmpty(token)? setErrData("token不能为空") : memberServiceManage.getMember(token);
     }
 
     @Override
-    public Map<String, Object> sign(Member member) {
+    public Map<String, Object> sign(@RequestBody Member member) {
         if(StringUtils.isEmpty(member.getUsername())){
             return setErrData("用户名不能为空");
         }
@@ -43,7 +44,7 @@ public class MemberServiceImpl extends BaseApiService implements MemberService {
     }
 
     @Override
-    public Map<String, Object> login(Member member) {
+    public Map<String, Object> login(@RequestBody Member member) {
         if(StringUtils.isEmpty(member.getPassword())){
             return setErrData("密码不能为空");
         }

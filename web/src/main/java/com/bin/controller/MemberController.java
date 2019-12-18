@@ -4,11 +4,13 @@ import com.bin.entity.Member;
 import com.bin.feign.MemberFeign;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * ClassName: MemberController <br/>
@@ -25,10 +27,17 @@ public class MemberController {
     @Resource
     private MemberFeign memberFeign;
     @RequestMapping("/login")
-    public String login(Member member){
-        log.info("进入membercontroller/login");
-        memberFeign.login(member);
-        return "login";
+    public String login(@RequestParam("phone") String phone,@RequestParam("password") String password){
+        log.info("进入membercontroller/login"+phone+"***"+password);
+        Member member = new Member(phone,password);
+        Map<String,Object> result = new HashMap<>();
+        result = memberFeign.login(member);
+        if("2998".equals(result.get("rsp_code"))) {
+            return "login";
+        }
+        Object data = result.get("data");
+        log.info(data.toString());
+        return "memberCen";
 
     }
 }

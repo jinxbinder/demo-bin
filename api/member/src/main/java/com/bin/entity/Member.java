@@ -76,6 +76,14 @@ public class Member {
         this.updated = updated;
     }
 
+    public Member(String phone, String password) {
+        this.phone = phone;
+        this.password = password;
+    }
+
+    public Member() {
+    }
+
     @Override
     public String toString() {
         return "Member{" +
