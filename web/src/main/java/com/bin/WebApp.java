@@ -17,8 +17,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients
-public class WebServer {
+public class WebApp {
     public static void main(String[] args){
-        SpringApplication.run(WebServer.class,args);
+        SpringApplication.run(WebApp.class,args);
     }
 }
