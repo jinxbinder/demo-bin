@@ -27,23 +27,43 @@ import java.util.Map;
  */
 @Controller
 public class MemberController extends BaseController{
-    private static final String LGOIN = "login";
+    private static final String LOGIN = "login";
+    private static final String SIGN = "sign";
     private static Logger log = LogManager.getLogger(MemberController.class);
     @Resource
     private MemberFeign memberFeign;
+    @RequestMapping("/localLogin")
+    public String localLogin(){
+        return LOGIN;
+    }
     @RequestMapping("/login")
     public String login(@RequestParam("phone") String phone, @RequestParam("password") String password, HttpServletRequest request, HttpServletResponse response){
         log.info("进入membercontroller/login"+phone+"***"+password);
         Member member = new Member(phone,password);
         Map<String,Object> result = memberFeign.login(member);
-        if("2998".equals(result.get("rsp_code"))) {
+        if(!"0000".equals(result.get("rsp_code"))) {
             String  err = (String) result.get("desc");
-            return setError(request,err,LGOIN);
+            return setError(request,err,LOGIN);
         }
         String token = (String) result.get("data");
         log.info(token);
         CookieUtil.addCookie(response, WebConstants.USER_TOKEN,token,WebConstants.COOKIE_TIME);
         return "memberCen";
 
+    }
+    @RequestMapping("/localSign")
+    public String localSign(){
+        return SIGN;
+    }
+    @RequestMapping("/sign")
+    public String sign(Member member,HttpServletRequest request,HttpServletResponse response){
+
+        Map<String,Object> result = memberFeign.sign(member);
+        if(!"0000".equals(result.get("rsp_code"))) {
+            String  err = (String) result.get("desc");
+            return setError(request,err,SIGN);
+        }
+
+        return LOGIN;
     }
 }
