@@ -14,10 +14,10 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @SpringBootTest
 public class ApiTest {
-    @Test
+   /* @Test
     public void testLog(){
         BaseApiService bs = new BaseApiService();
 
         System.out.println(bs.setResult("0000","成功","sdfsadf"));
-    }
+    }*/
 }
