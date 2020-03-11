@@ -32,7 +32,7 @@ public class MemberController extends BaseController{
     private static Logger log = LogManager.getLogger(MemberController.class);
     @Resource
     private MemberFeign memberFeign;
-    @RequestMapping("/localLogin")
+    @RequestMapping("/")
     public String localLogin(){
         return LOGIN;
     }

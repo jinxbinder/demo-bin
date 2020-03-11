@@ -7,9 +7,14 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 spring:
-  freemarker:
-    suffix: .ftl
-    templateLoaderPath: classpath:/templates/
   application:
     name: web
+  #thymeleaf
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: utf-8
+    mode: HTML5
+    cache: false
 

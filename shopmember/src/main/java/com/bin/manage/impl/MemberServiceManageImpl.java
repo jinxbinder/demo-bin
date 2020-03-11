@@ -74,13 +74,13 @@ public class MemberServiceManageImpl extends BaseApiService implements MemberSer
             log.error("***sql插入错误：",e);
             return setErrData("注册失败,用户名或手机号已存在");
         }
-        //队列
+/*        //队列
         Destination activeMQQueue = new ActiveMQQueue(MESSAGES_QUEUE);
         // 组装报文格式
         String mailMessage = mailMessage(member.getEmail(), member.getUsername());
         log.info("###regist() 注册发送邮件报文mailMessage:{}", mailMessage);
         // mq
-        signMailProducer.send(activeMQQueue, mailMessage);
+        signMailProducer.send(activeMQQueue, mailMessage);*/
         return setSuccessData("注册成功");
     }
     /**
