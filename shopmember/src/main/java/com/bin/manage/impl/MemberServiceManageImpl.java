@@ -11,18 +11,23 @@ import com.bin.constants.DBconf;
 import com.bin.constants.MQconf;
 import com.bin.dao.MemberDao;
 import com.bin.entity.Member;
+import com.bin.entity.User;
+import com.bin.entity.UserExample;
 import com.bin.manage.MemberServiceManage;
+import com.bin.mapper.UserMapper;
 import com.bin.mq.producer.SignMailProducer;
 
 
-import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.commons.lang.StringUtils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.jms.Destination;
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -44,8 +49,11 @@ public class MemberServiceManageImpl extends BaseApiService implements MemberSer
     private String MESSAGES_QUEUE;
     @Autowired
     private MemberDao memberDao;
+    @Resource
+    private UserMapper userMapper;
     @Autowired
     private TokenUtil tokenUtil;
+    Logger log = LogManager.getLogger(MemberServiceManageImpl.class);
     @Override
     public Map<String, Object> getMember(String token) {
         String userId = baseRedisService.get(token);
@@ -99,18 +107,34 @@ public class MemberServiceManageImpl extends BaseApiService implements MemberSer
     * @author libd <br/>
     */
     @Override
-    public Map<String, Object> login(Member member) {
-        String phone = member.getPhone();
-        String password = member.getPassword();
-        String passSalt = md5PassSalt(phone,password);
-        Member memberInfo = memberDao.getLogin(phone,passSalt);
-        if(memberInfo == null){
+    public Map<String, Object> login(String username,String password) {
+
+        //String passSalt = md5PassSalt(username,password);
+        //Member memberInfo = memberDao.getLogin(username,passSalt);
+        log.info(username+password);
+        User userInfo = null;
+        try {
+            userInfo = userMapper.selectByPrimaryKey(103L);
+            log.info(userInfo.toString());
+        } catch (Exception e) {
+            log.error("查询异常",e);
+        }
+        if(userInfo == null){
             return setErrData("手机号或密码不正确");
         }
         String token = tokenUtil.getToken();
-        String memberId = memberInfo.getId()+"";
+        String memberId = userInfo.getUserId()+"";
         baseRedisService.set(memberId,token, 600L);
         return setSuccessData(token);
+    }
+    /**
+    * Description: 功能描述（页面跳转） <br/>
+    * date: 2020/3/11 21:23<br/>
+    * @author libd <br/>  
+    */
+    @Override
+    public String page(String url) {
+        return url;
     }
 
     /**

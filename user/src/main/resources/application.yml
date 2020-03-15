@@ -1,8 +1,5 @@
-#注册客户端配置
 server:
-  port: 8762
- # servlet:
-   # context-path: /member
+  port: 8888
 
 eureka:
   client:
@@ -10,21 +7,11 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 spring:
   application:
-    name: member
-  #redis配置
-  redis:
-      host: 127.0.0.1
-      port: 6379
-      jedis:
-        pool:
-          max-idle: 100
-          min-idle: 1
-          max-active: 1000
-      password: 123456
+    name: user
   #数据源
   datasource:
       name: test
-      url: jdbc:mysql://localhost:3306/ry
+      url: jdbc:mysql://localhost:3306/abs?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
       username: root
       password: root
       type: com.alibaba.druid.pool.DruidDataSource
@@ -43,29 +30,7 @@ spring:
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
-
-
-  ##activemq连接信息
-#  activemq:
-#    broker-url: tcp://localhost:61616
-#    in-memory: true
-#    pool:
-#      enabled: false
-#    user: admin
-#    password: admin
-
-
-##队列
-messages:
-  queue: mail_queue
-
-
-
-#log4j2配置
-logging:
-  config: classpath:log4j2.xml
-
-
-mybatis:
-  mapper-locations: classpath:mapping/*.xml
-  type-aliases-package: com.bin.entity
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

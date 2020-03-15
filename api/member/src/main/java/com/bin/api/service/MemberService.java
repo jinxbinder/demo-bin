@@ -1,10 +1,8 @@
 package com.bin.api.service;
 
 import com.bin.entity.Member;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.bin.entity.User;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -38,6 +36,13 @@ public interface MemberService {
     * date: 2019/12/15 12:22<br/>
     * @author libd <br/>
     */
-    @RequestMapping("/login")
-    Map<String,Object> login(@RequestBody Member member);
+    @GetMapping("/login")
+    Map<String,Object> login(@RequestParam("username") String username, @RequestParam("password") String password);
+    /**
+    * Description: 功能描述（页面跳转） <br/>
+    * date: 2020/3/11 21:15<br/>
+    * @author libd <br/>  
+    */
+    @GetMapping("/page")
+    String page(@RequestParam("url") String url);
 }

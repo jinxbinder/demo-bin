@@ -1,6 +1,8 @@
 package com.bin.manage;
 
 import com.bin.entity.Member;
+import com.bin.entity.User;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 
@@ -22,6 +24,8 @@ public interface MemberServiceManage {
     //MD5加盐
     String md5PassSalt(String phone, String password);
     //会员登录
-    Map<String,Object> login(Member member);
+    Map<String,Object> login(String username, String password);
+    //页面跳转
+    String page(String url);
 
 }

@@ -12,8 +12,9 @@
     <module>web</module>
     <module>api</module>
     <module>shopmember</module>
-      <module>common</module>
+    <module>common</module>
     <module>messages</module>
+    <module>user</module>
   </modules>
 
   <name>shop-parent</name>

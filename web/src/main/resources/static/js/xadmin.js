@@ -58,9 +58,11 @@
   }
 
 	Xadmin.prototype.add_lay_tab = function(title,url,id) {
-		element.tabAdd('xbs_tab', {
+	    var url1 = "page?url="+url;
+        console.log(url1)
+        element.tabAdd('xbs_tab', {
 	       title: title 
-	        ,content: '<iframe tab-id="'+id+'" frameborder="0" src="'+url+'" scrolling="yes" class="x-iframe"></iframe>'
+	        ,content: '<iframe tab-id="'+id+'" frameborder="0" src="'+url1+'" scrolling="yes" class="x-iframe"></iframe>'
 	        ,id: id
 	    })
 	}

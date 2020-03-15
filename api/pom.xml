@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
     <name>shop-api</name>
     <modules>
-        <module>order</module>
         <module>member</module>
     </modules>
 
